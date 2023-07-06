@@ -20,19 +20,20 @@ const SearchFormLayout = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-`;
-const KeepBox = styled.div`
-  width: 100%;
-  height: 30px;
-  border: 1px solid;
+  margin-bottom: 40px;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  justify-content: space-between;
   width: 40%;
   height: 120px;
   margin: 40px 0;
-  /* border: 1px solid; */
+  border: 1px solid;
+`;
+const KeepBox = styled.div`
+  width: 100%;
+  height: 40px;
+  border: 1px solid;
 `;

@@ -52,7 +52,7 @@ const NavItem = styled.li`
   cursor: pointer;
   width: 10%;
   height: 40px;
-  padding-top: 8px;
+  padding-top: 11px;
   background-color: aqua;
 `;
 const UserBox = styled.div`
