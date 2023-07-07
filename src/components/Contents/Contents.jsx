@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css, styled } from 'styled-components';
 import RandomColor from '../../feature/RandomColor';
 import Button from '../common/Button';
+import Modal from '../modal/Modal';
+import shortid from 'shortid';
 
 const Contents = ({ posts, genre }) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const isOpenToggleHandler = () => {
+    setIsOpen((prev) => !prev);
+  };
   return (
     <ContentsLayout>
       {/* <h2>콘텐츠</h2> */}
       <ShareBox>
-        <Button size={'small'} bc={'#222'} fc={'#fff'}>
+        <Button
+          size={'small'}
+          bc={'#222'}
+          fc={'#fff'}
+          fnc={isOpenToggleHandler}>
           공유하기
         </Button>
       </ShareBox>
@@ -17,18 +27,19 @@ const Contents = ({ posts, genre }) => {
           ?.filter((post) => (genre ? post.genre === genre : post))
           .map((post) => {
             return (
-              <ContentsItem>
+              <ContentsItem key={post.id}>
                 <ContentsArtist>{post.artist}</ContentsArtist>
                 <ContentsTitle>{post.title}</ContentsTitle>
                 <HashBox>
                   {post.hash.map((tag) => {
-                    return <Hash>{tag}</Hash>;
+                    return <Hash key={shortid.generate()}>{tag}</Hash>;
                   })}
                 </HashBox>
               </ContentsItem>
             );
           })}
       </ContentsList>
+      {isOpen && <Modal fnc={isOpenToggleHandler} />}
     </ContentsLayout>
   );
 };

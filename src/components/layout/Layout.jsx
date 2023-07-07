@@ -9,7 +9,7 @@ export default Layout;
 
 const Main = styled.main`
   position: relative;
-  width: 100%;
+  width: 100vw;
   min-height: calc(100vh - 330px);
   margin-top: 80px;
 `;
