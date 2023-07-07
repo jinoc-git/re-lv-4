@@ -5,7 +5,11 @@
       "artist": "윤하",
       "title": "별의 조각",
       "genre": "internal",
-      "hash": ["발라드", "숲속에서", "감성"],
+      "hash": [
+        "발라드",
+        "숲속에서",
+        "감성"
+      ],
       "linkUrl": "https://www.youtube.com/watch?v=CWTwiE15pdY"
     },
     {
@@ -13,7 +17,13 @@
       "artist": "새소년",
       "title": "파도",
       "genre": "internal",
-      "hash": ["락", "신나는", "두둠칫", "고개까딱까딱", "황소윤"],
+      "hash": [
+        "락",
+        "신나는",
+        "두둠칫",
+        "고개까딱까딱",
+        "황소윤"
+      ],
       "linkUrl": "https://www.youtube.com/watch?v=L4dOpDJPcEA"
     },
     {
@@ -21,7 +31,12 @@
       "artist": "Bren Joy",
       "title": "Fiji Fine",
       "genre": "abroad",
-      "hash": ["R&B", "소울", "랩", "감각적인"],
+      "hash": [
+        "R&B",
+        "소울",
+        "랩",
+        "감각적인"
+      ],
       "linkUrl": "https://www.youtube.com/watch?v=h2giIeVwMOc"
     }
   ]

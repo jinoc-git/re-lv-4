@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { css, styled } from 'styled-components';
-import RandomColor from '../../feature/RandomColor';
+import RandomColor from '../../feature/randomColor';
 import Button from '../common/Button';
 import Modal from '../modal/Modal';
 import shortid from 'shortid';
 
 const Contents = ({ posts, genre }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const isOpenToggleHandler = () => {
     setIsOpen((prev) => !prev);
   };
