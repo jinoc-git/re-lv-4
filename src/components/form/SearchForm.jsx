@@ -7,7 +7,7 @@ const SearchForm = () => {
     <SearchFormLayout>
       <Form>
         <KeepBox></KeepBox>
-        <Input type={'text'} width={80} height={50} />
+        <Input type={'text'} w={'80%'} h={'50px'} />
       </Form>
     </SearchFormLayout>
   );

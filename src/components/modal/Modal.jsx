@@ -7,7 +7,7 @@ const Modal = ({ fnc }) => {
   return createPortal(
     <ModalLayout>
       <ModalBox>
-        <PostForm />
+        <PostForm fnc={fnc} />
       </ModalBox>
     </ModalLayout>,
     document.getElementById('modal-portal')
@@ -32,7 +32,8 @@ const ModalBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 40%;
-  height: 30%;
+  max-width: 580px;
+  height: 40%;
   padding: 20px;
   border-radius: 12px;
   background-color: #fff;
