@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "artist": "윤하",
+      "title": "별의 조각",
+      "genre": "internal",
+      "hash": ["발라드", "숲속에서", "감성"],
+      "link": "https://www.youtube.com/watch?v=CWTwiE15pdY"
+    },
+    {
+      "id": 2,
+      "artist": "새소년",
+      "title": "파도",
+      "genre": "internal",
+      "hash": ["락", "신나는", "두둠칫", "고개까딱까딱", "황소윤"],
+      "link": "https://www.youtube.com/watch?v=L4dOpDJPcEA"
+    },
+    {
+      "id": 3,
+      "artist": "Bren Joy",
+      "title": "Fiji Fine",
+      "genre": "abroad",
+      "hash": ["R&B", "소울", "랩", "감각적인"],
+      "link": "https://www.youtube.com/watch?v=h2giIeVwMOc"
+    }
+  ]
+}
