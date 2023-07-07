@@ -14,6 +14,7 @@ const Header = () => {
           <NavItem>해외</NavItem>
         </NavList>
       </Nav>
+      {/* lv5 준비 */}
       <UserBox>
         <User></User>
       </UserBox>

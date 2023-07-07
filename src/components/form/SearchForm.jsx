@@ -31,6 +31,12 @@ const Form = styled.form`
   height: 120px;
   margin: 40px 0;
   border: 1px solid;
+  @media only screen and (max-width: 1024px) {
+    width: 60%;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 const KeepBox = styled.div`
   width: 100%;
