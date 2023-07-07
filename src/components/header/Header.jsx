@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <HeaderLayout>
       <LogoBox>
@@ -9,9 +11,9 @@ const Header = () => {
       </LogoBox>
       <Nav>
         <NavList>
-          <NavItem>홈</NavItem>
-          <NavItem>국내</NavItem>
-          <NavItem>해외</NavItem>
+          <NavItem onClick={() => navigate('/')}>홈</NavItem>
+          <NavItem onClick={() => navigate('/internal')}>국내</NavItem>
+          <NavItem onClick={() => navigate('/abroad')}>해외</NavItem>
         </NavList>
       </Nav>
       {/* lv5 준비 */}

@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../components/header/Header';
+import Abroad from '../components/Abroad';
 import Footer from '../components/footer/Footer';
-import Genre from '../components/Genre';
 
-const GenrePage = () => {
+const AbroadPage = () => {
   return (
     <>
       <Header />
-      <Genre />
+      <Abroad />
       <Footer />
     </>
   );
 };
 
-export default GenrePage;
+export default AbroadPage;
