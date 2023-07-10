@@ -37,7 +37,7 @@ const ModalBox = styled.div`
   transform: translate(-50%, -50%);
   width: 40%;
   max-width: 580px;
-  height: 35%;
+  height: 40%;
   padding: 20px;
   border-radius: 12px;
   background-color: #fff;

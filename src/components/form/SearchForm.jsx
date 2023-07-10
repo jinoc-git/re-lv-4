@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import Input from '../common/Input';
 
 const SearchForm = () => {
+  // lv 5에서 사용
   return (
     <SearchFormLayout>
       <Form>

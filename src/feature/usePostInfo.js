@@ -5,9 +5,11 @@ const usePostInfo = () => {
     artist: '',
     title: '',
     genre: '',
+    password: '',
     linkUrl: '',
     hash: [],
   });
+  const [pwInputOutline, setPwInputOutline] = useState(false);
 
   const handler = ({ target }) => {
     const { name, value } = target;
@@ -19,9 +21,19 @@ const usePostInfo = () => {
       const splitHash = value.split(' ');
       setInfo({ ...info, hash: [...splitHash] });
     }
+    if (name === 'password') {
+      const passwordRegEx =
+        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}$/;
+      if (passwordRegEx.test(value)) {
+        setPwInputOutline(true);
+        setInfo({ ...info, password: value });
+      } else {
+        setPwInputOutline(false);
+      }
+    }
   };
 
-  return [info, handler];
+  return [pwInputOutline, info, handler];
 };
 
 export default usePostInfo;

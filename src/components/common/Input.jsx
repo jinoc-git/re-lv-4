@@ -25,6 +25,13 @@ const ShareInput = styled.input`
   padding: 0 10px;
   border-radius: 5px;
   font-size: ${({fs}) => fs ? fs : '18px'};
+  &:focus {
+    ${({fcoc}) => {
+      return css`
+        outline: ${fcoc && `2px solid ${fcoc}`};
+      `
+    }}
+  }
   border: 0.5px solid ${({bc}) => bc ? bc : '#dcdcdc'};
   ${({w, h}) => {
     return css`

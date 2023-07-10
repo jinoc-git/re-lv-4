@@ -4,15 +4,17 @@ import RandomColor from '../../feature/randomColor';
 import Button from '../common/Button';
 import Modal from '../modal/Modal';
 import shortid from 'shortid';
+import { useNavigate } from 'react-router-dom';
 
 const Contents = ({ posts, genre }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenToggleHandler = () => {
     setIsOpen((prev) => !prev);
   };
+  const navigate = useNavigate();
   return (
     <ContentsLayout>
-      <h2 style={{fontSize: '0px'}}>{genre ? genre : 'home'}</h2>
+      <h2 style={{ fontSize: '0px' }}>{genre ? genre : 'home'}</h2>
       <ShareBox>
         <Button
           size={'small'}
@@ -27,7 +29,11 @@ const Contents = ({ posts, genre }) => {
           ?.filter((post) => (genre ? post.genre === genre : post))
           .map((post) => {
             return (
-              <ContentsItem key={post.id}>
+              <ContentsItem
+                key={post.id}
+                onClick={() =>
+                  navigate(`/detail/${post.id}`, { state: { post: post } })
+                }>
                 <ContentsArtist>{post.artist}</ContentsArtist>
                 <ContentsTitle>{post.title}</ContentsTitle>
                 <HashBox>
