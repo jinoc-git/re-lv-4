@@ -1,26 +1,83 @@
-import React, { useEffect } from 'react';
-import { styled } from 'styled-components';
+import React, { useEffect, useRef } from 'react';
+import { css, styled } from 'styled-components';
 import { createPortal } from 'react-dom';
 import Button from '../common/Button';
+import Input from '../common/Input';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deletePost } from '../../api/post';
+import { useNavigate } from 'react-router-dom';
 
-const SystemModal = ({ msg, isOpenHanler }) => {
+const SystemModal = (props) => {
+  const {
+    msg,
+    isOpenHanler,
+    input,
+    controlPost,
+    setPwCheck,
+    changeMsg,
+    setChangeMsg,
+    type,
+    setConfirmDelete,
+    id,
+  } = props;
+  const navigate = useNavigate();
   useEffect(() => {
     document.body.style = 'overflow: hidden';
     return () => (document.body.style = 'overflow: auto');
   });
+  const checkInput = useRef();
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('posts');
+    },
+  });
+
   return createPortal(
     <ModalLayout>
-      <ModalBox>
+      <ModalBox input={input}>
         <AlertParagragh>{msg}</AlertParagragh>
+        {input && <Input type={'password'} h={'30px'} refs={checkInput} />}
         <ButtonBox>
           <Button
             w={'80px'}
             h={'36px'}
             fc={'#fff'}
             bc={'#222'}
-            fnc={() => isOpenHanler(false)}>
+            fnc={() => {
+              if (!input && msg !== '정말 삭제하시겠습니까?') {
+                isOpenHanler(false);
+              } else if (msg === '정말 삭제하시겠습니까?') {
+                setConfirmDelete(true);
+                isOpenHanler(false);
+                mutation.mutate(id);
+                navigate('/');
+              } else {
+                const val = checkInput.current.value;
+                type === 'edit'
+                  ? controlPost(val, 'edit')
+                  : controlPost(val, 'delete');
+              }
+            }}>
             확인
           </Button>
+          {input || changeMsg ? (
+            <Button
+              w={'80px'}
+              h={'36px'}
+              fc={'#fff'}
+              bc={'#222'}
+              fnc={() => {
+                isOpenHanler(false);
+                setPwCheck('');
+                setChangeMsg(false);
+              }}>
+              취소
+            </Button>
+          ) : (
+            <></>
+          )}
         </ButtonBox>
       </ModalBox>
     </ModalLayout>,
@@ -49,7 +106,7 @@ const ModalBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 280px;
-  height: 140px;
+  height: ${({ input }) => (input ? '160px' : '140px')};
   padding: 10px;
   border-radius: 12px;
   border: 2px solid #f26419;

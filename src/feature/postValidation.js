@@ -1,6 +1,5 @@
-const postValidation = (postInfo, refs, isOpenHanler) => {
-  const { title, artist, linkUrl, genre, hash } = postInfo;
-  const { titleInput, artistInput, linkUrlInput } = refs;
+const postValidation = (postInfo, isOpenHanler, pwInputOutline) => {
+  const { title, artist, linkUrl, genre, hash, password } = postInfo;
 
   if (!genre) {
     isOpenHanler(true, '국내 또는 해외를 선택해 주세요');
@@ -8,17 +7,18 @@ const postValidation = (postInfo, refs, isOpenHanler) => {
   }
   if (!title) {
     isOpenHanler(true, '제목을 적어주세요');
-    titleInput.current.focus();
     return false;
   }
   if (!artist) {
     isOpenHanler(true, '가수를 적어주세요');
-    artistInput.current.focus();
     return false;
   }
   if (!linkUrl) {
     isOpenHanler(true, '링크를 적어주세요');
-    linkUrlInput.current.focus();
+    return false;
+  }
+  if(!pwInputOutline) {
+    isOpenHanler(true, '비밀번호 형식을 확인해 주세요');
     return false;
   }
   const hashNum = hash.length;

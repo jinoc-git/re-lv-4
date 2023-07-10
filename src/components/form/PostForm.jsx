@@ -12,14 +12,9 @@ import useSystemModal from '../../feature/useSystemModal';
 import SystemModal from '../modal/SystemModal';
 
 const PostForm = ({ fnc }) => {
-  const [postInfo, onChangeHandler] = usePostInfo();
+  const [pwInputOutline, postInfo, onChangeHandler] = usePostInfo();
   const [hashValue, onHashHandler, addHash] = useHashInput();
   const [isOpen, msg, isOpenHanler] = useSystemModal();
-
-  const titleInput = useRef();
-  const artistInput = useRef();
-  const linkUrlInput = useRef();
-  const refs = { titleInput, artistInput, linkUrlInput };
 
   const queryClient = useQueryClient();
   const mutation = useMutation(addPost, {
@@ -30,7 +25,7 @@ const PostForm = ({ fnc }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (postValidation(postInfo, refs, isOpenHanler)) {
+    if (postValidation(postInfo, isOpenHanler, pwInputOutline)) {
       const checkedHash = postInfo.hash.filter((h) => h !== '');
       const hash = [...checkedHash];
       const newPost = {
@@ -56,9 +51,22 @@ const PostForm = ({ fnc }) => {
             해외
           </label>
         </RadioBox>
-        <Input w={'100%'} h={'40px'} name={'title'} refs={titleInput} />
-        <Input w={'100%'} h={'40px'} name={'artist'} refs={artistInput} />
-        <Input w={'100%'} h={'40px'} name={'linkUrl'} refs={linkUrlInput} />
+        <Input w={'100%'} h={'40px'} name={'title'} />
+        <Input w={'100%'} h={'40px'} name={'artist'} />
+        <Input
+          w={'100%'}
+          h={'40px'}
+          name={'linkUrl'}
+          ph={'YouTube URL'}
+        />
+        <Input
+          w={'100%'}
+          h={'40px'}
+          type={'password'}
+          name={'password'}
+          ph={'영문, 숫자, 특수문자 조합 8~12자'}
+          fcoc={pwInputOutline ? 'blue' : 'red'}
+        />
       </InfoBox>
       <HashTagInput
         name="hash"
