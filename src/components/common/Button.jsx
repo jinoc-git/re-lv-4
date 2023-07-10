@@ -16,6 +16,9 @@ const Btn = styled.button`
   cursor: pointer;
   border: none;
   color: ${({ fc }) => fc};
+  &:hover {
+    color: #F26419;
+  }
   background-color: ${({ bc }) => bc};
   ${({ size }) => {
     switch (size) {
@@ -42,11 +45,17 @@ const Btn = styled.button`
         `;
       default:
         return css`
-          width: 140px;
-          height: 45px;
-          border-radius: 10px;
-          font-size: 18px;
+          width: 100px;
+          height: 40px;
+          border-radius: 8px;
+          font-size: 16px;
         `;
     }
+  }}
+  ${({w, h}) => {
+    return css`
+      width: ${w};
+      height: ${h};
+    `
   }}
 `;

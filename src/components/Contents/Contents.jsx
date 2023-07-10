@@ -12,7 +12,7 @@ const Contents = ({ posts, genre }) => {
   };
   return (
     <ContentsLayout>
-      {/* <h2>콘텐츠</h2> */}
+      <h2 style={{fontSize: '0px'}}>{genre ? genre : 'home'}</h2>
       <ShareBox>
         <Button
           size={'small'}
@@ -48,6 +48,15 @@ export default Contents;
 
 const ContentsLayout = styled.section`
   width: 100%;
+
+  /* lv4에만 적용 */
+  padding-top: 100px;
+  @media only screen and (max-width: 1024px) {
+    padding-top: 60px;
+  }
+  @media only screen and (max-width: 768px) {
+    padding-top: 40px;
+  }
 `;
 const ShareBox = styled.div`
   display: flex;
@@ -70,6 +79,7 @@ const ContentsList = styled.ul`
   }
 `;
 const ContentsItem = styled.li`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

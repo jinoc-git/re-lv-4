@@ -8,7 +8,6 @@ const URL = process.env.REACT_APP_SERVER_URL;
 
 const getPosts = async () => {
   const res = await axios.get(`${URL}/posts`);
-  console.log(res)
   return res.data;
 };
 

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import PostForm from '../form/PostForm';
 import { createPortal } from 'react-dom';
 
 const Modal = ({ fnc }) => {
+  useEffect(() => {
+    document.body.style = 'overflow: hidden';
+    return () => (document.body.style = 'overflow: auto');
+  });
   return createPortal(
     <ModalLayout>
       <ModalBox>
@@ -17,7 +21,7 @@ const Modal = ({ fnc }) => {
 export default Modal;
 
 const ModalLayout = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -33,16 +37,14 @@ const ModalBox = styled.div`
   transform: translate(-50%, -50%);
   width: 40%;
   max-width: 580px;
-  height: 40%;
+  height: 35%;
   padding: 20px;
   border-radius: 12px;
   background-color: #fff;
   @media only screen and (max-width: 1024px) {
     width: 60%;
-    
   }
   @media only screen and (max-width: 768px) {
     width: 80%;
-    
   }
 `;
