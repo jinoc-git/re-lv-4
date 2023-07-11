@@ -30,6 +30,9 @@ const Home = () => {
       window.removeEventListener('scroll', showBtn);
     };
   }, []);
+  if(isLoading) {
+    return <div>로딩중</div>
+  }
   return (
     <Layout>
       {/* <SearchForm /> */}

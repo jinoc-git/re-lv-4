@@ -25,8 +25,7 @@ const Contents = ({ posts, genre }) => {
         </Button>
       </ShareBox>
       <ContentsList>
-        {posts
-          ?.filter((post) => (genre ? post.genre === genre : post))
+        {posts.filter((post) => (genre ? post.genre === genre : post))
           .map((post) => {
             return (
               <ContentsItem
