@@ -82,6 +82,61 @@
         "#랩",
         "#감각적인"
       ]
+    },
+    {
+      "id": "0qyIPMggB",
+      "artist": "Dominic Fike",
+      "title": "Mona Lisa",
+      "genre": "abroad",
+      "password": "qwer1234!",
+      "linkUrl": "https://www.youtube.com/watch?v=5u7A5RSmay0",
+      "hash": [
+        "#pop",
+        "#스파이더맨",
+        "#OST"
+      ]
+    },
+    {
+      "id": "JIy2VBwi5",
+      "artist": "Lauv",
+      "title": "Steal The Show",
+      "genre": "abroad",
+      "password": "qwer1234!",
+      "linkUrl": "https://www.youtube.com/watch?v=DwuJeGYlYyw",
+      "hash": [
+        "#엘리멘탈",
+        "#OST",
+        "#disney"
+      ]
+    },
+    {
+      "id": "qA_M4_YEB",
+      "artist": "X Ambassadors, Medium Build",
+      "title": "Friend For Life",
+      "genre": "abroad",
+      "password": "qwer1234!",
+      "linkUrl": "https://www.youtube.com/watch?v=NQ1Va-qSZKk",
+      "hash": [
+        "#리듬감",
+        "#밴드",
+        "#신남",
+        "#록밴드"
+      ]
+    },
+    {
+      "id": "QFO0vLolz",
+      "artist": "PREP",
+      "title": "One Day at a Time",
+      "genre": "abroad",
+      "password": "qwer1234!",
+      "linkUrl": "https://www.youtube.com/watch?v=DjHaL5egC18",
+      "hash": [
+        "#PREP",
+        "#시티팝",
+        "#밴드",
+        "#노을",
+        "#저녁"
+      ]
     }
   ]
 }
