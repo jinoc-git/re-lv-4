@@ -54,7 +54,7 @@ const DotsWrapperBtn = styled.button`
   height: 40px;
   border: none;
   margin-right: 10px;
-  background-color: #fafafa;
+  background-color: #fff;
 `;
 const DotSpan = styled.span`
   display: block;
