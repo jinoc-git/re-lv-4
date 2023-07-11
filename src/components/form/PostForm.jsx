@@ -1,23 +1,33 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 import Input from '../common/Input';
 import usePostInfo from '../../feature/usePostInfo';
 import Button from '../common/Button';
 import useHashInput from '../../feature/useHashInput';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addPost } from '../../api/post';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { addPost, updatePost } from '../../api/post';
 import shortid from 'shortid';
 import postValidation from '../../feature/postValidation';
 import useSystemModal from '../../feature/useSystemModal';
 import SystemModal from '../modal/SystemModal';
+import editPostValidation from '../../feature/editPostValidation';
 
-const PostForm = ({ fnc }) => {
+const PostForm = ({ fnc, post }) => {
   const [pwInputOutline, postInfo, onChangeHandler] = usePostInfo();
-  const [hashValue, onHashHandler, addHash] = useHashInput();
+  const [hashValue, onHashHandler, addHash, editHash] = useHashInput();
   const [isOpen, msg, isOpenHanler] = useSystemModal();
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(addPost, {
+  const addMutation = useMutation(addPost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('posts');
+    },
+  });
+  const editMutation = useMutation(updatePost, {
+    onMutate: async (newPost) => {
+      await queryClient.cancelQueries({ queryKey: ['posts', newPost.id] });
+      queryClient.setQueriesData(['posts', newPost.id], newPost);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries('posts');
     },
@@ -25,18 +35,45 @@ const PostForm = ({ fnc }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (postValidation(postInfo, isOpenHanler, pwInputOutline)) {
-      const checkedHash = postInfo.hash.filter((h) => h !== '');
-      const hash = [...checkedHash];
-      const newPost = {
-        id: shortid.generate(),
-        ...postInfo,
-        hash,
-      };
-      mutation.mutate(newPost);
-      fnc();
+    if (post) {
+      const [_, internal, abroad, title, artist, linkUrl, hash] = e.target;
+      if (editPostValidation(e.target, isOpenHanler)) {
+        const checkedHash = hash.value
+          .split(' ')
+          .filter((h) => h !== '' && h !== '#');
+        const newHash = [...checkedHash];
+        const newPost = {
+          id: post.id,
+          artist: artist.value,
+          title: title.value,
+          genre: internal.checked ? 'internal' : 'abroad',
+          password: post.password,
+          linkUrl: linkUrl.value,
+          hash: newHash,
+        };
+        editMutation.mutate(newPost);
+        fnc();
+      }
+    } else {
+      if (postValidation(postInfo, isOpenHanler, pwInputOutline)) {
+        const checkedHash = postInfo.hash.filter((h) => h !== '');
+        const hash = [...checkedHash];
+        const newPost = {
+          id: shortid.generate(),
+          ...postInfo,
+          hash,
+        };
+        addMutation.mutate(newPost);
+        fnc();
+      }
     }
   };
+
+  useEffect(() => {
+    if (post) {
+      editHash(post.hash);
+    }
+  }, []);
 
   return (
     <FormLayout onChange={onChangeHandler} onSubmit={onSubmitHandler}>
@@ -51,22 +88,30 @@ const PostForm = ({ fnc }) => {
             해외
           </label>
         </RadioBox>
-        <Input w={'100%'} h={'40px'} name={'title'} />
-        <Input w={'100%'} h={'40px'} name={'artist'} />
+        <Input w={'100%'} h={'40px'} name={'title'} val={post && post.title} />
+        <Input
+          w={'100%'}
+          h={'40px'}
+          name={'artist'}
+          val={post && post.artist}
+        />
         <Input
           w={'100%'}
           h={'40px'}
           name={'linkUrl'}
           ph={'YouTube URL'}
+          val={post && post.linkUrl}
         />
-        <Input
-          w={'100%'}
-          h={'40px'}
-          type={'password'}
-          name={'password'}
-          ph={'영문, 숫자, 특수문자 조합 8~12자'}
-          fcoc={pwInputOutline ? 'blue' : 'red'}
-        />
+        {!post && (
+          <Input
+            w={'100%'}
+            h={'40px'}
+            type={'password'}
+            name={'password'}
+            ph={'영문, 숫자, 특수문자 조합 8~12자'}
+            fcoc={pwInputOutline ? 'blue' : 'red'}
+          />
+        )}
       </InfoBox>
       <HashTagInput
         name="hash"

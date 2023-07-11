@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { deletePost } from '../../api/post';
 
-const Dots = ({ post, isOpenHanler, setType }) => {
+const Dots = ({ post, isOpenHanler, setType, setInput }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenHandler = () => {
     setIsOpen(true);
@@ -29,6 +29,7 @@ const Dots = ({ post, isOpenHanler, setType }) => {
             onMouseDown={() => {
               isOpenHanler(true, '비밀번호를 입력해 주세요');
               setType('edit');
+              setInput(true);
             }}>
             수정
           </OptionItem>
@@ -36,6 +37,7 @@ const Dots = ({ post, isOpenHanler, setType }) => {
             onMouseDown={() => {
               isOpenHanler(true, '비밀번호를 입력해 주세요');
               setType('delete');
+              setInput(true);
             }}>
             삭제
           </OptionItem>

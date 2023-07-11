@@ -19,8 +19,8 @@ const deletePost = async (id) => {
   await axios.delete(`${URL}/posts/${id}`);
 };
 
-const updatePost = async (id, contents) => {
-  await axios.patch(`${URL}/posts/${id}`, {});
+const updatePost = async ({id, ...contents}) => {
+  await axios.patch(`${URL}/posts/${id}`, {...contents});
 };
 
 export { getPosts, addPost, deletePost, updatePost };

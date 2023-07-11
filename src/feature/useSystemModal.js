@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 const useSystemModal = () => {
   const [isOpen, setIsOpen] = useState({
     is: false,
-    msg: '',
+    msg: [''],
   });
 
   const handler = (val, msg) => {
-    setIsOpen({is: val, msg});
+    setIsOpen({ ...isOpen, is: val, msg: [msg] });
   };
 
-  return [isOpen.is, isOpen.msg, handler];
+  return [isOpen.is, isOpen.msg[0], handler];
 };
 
 export default useSystemModal;

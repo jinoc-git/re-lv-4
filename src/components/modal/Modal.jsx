@@ -3,15 +3,15 @@ import { styled } from 'styled-components';
 import PostForm from '../form/PostForm';
 import { createPortal } from 'react-dom';
 
-const Modal = ({ fnc }) => {
+const Modal = ({ fnc, post }) => {
   useEffect(() => {
     document.body.style = 'overflow: hidden';
     return () => (document.body.style = 'overflow: auto');
   });
   return createPortal(
     <ModalLayout>
-      <ModalBox>
-        <PostForm fnc={fnc} />
+      <ModalBox post={post ? true : false}>
+        <PostForm fnc={fnc} post={post} />
       </ModalBox>
     </ModalLayout>,
     document.getElementById('modal-portal')
@@ -37,7 +37,7 @@ const ModalBox = styled.div`
   transform: translate(-50%, -50%);
   width: 40%;
   max-width: 580px;
-  height: 40%;
+  height: ${({post}) => post ? '320px' : '360px'};
   padding: 20px;
   border-radius: 12px;
   background-color: #fff;

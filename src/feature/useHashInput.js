@@ -3,12 +3,20 @@ import React, { useState } from 'react';
 const useHashInput = () => {
   const [value, setValue] = useState('#');
   const [key, setKey] = useState(false);
-
+  
   const addHash = (e) => {
     if (e.keyCode === 32) {
       setKey(true);
     }
   };
+
+  const editHash = (h) => {
+    let val = '';
+    h.forEach(el => {
+      val += ' ' + el
+    });
+    setValue(val)
+  }
 
   const onChangeHashHandler = ({ target }) => {
     let str = target.value;
@@ -33,7 +41,9 @@ const useHashInput = () => {
     setKey(false);
   };
 
-  return [value, onChangeHashHandler, addHash];
+  
+
+  return [value, onChangeHashHandler, addHash, editHash];
 };
 
 export default useHashInput;
