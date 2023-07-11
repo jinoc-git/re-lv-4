@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { deletePost } from '../../api/post';
 
 const Dots = ({ post, isOpenHanler, setType, setInput }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenHandler = () => {
     setIsOpen(true);
   };
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { title, artist, hash, linkUrl, password } = post;
-
-  // const queryClient = useQuery();
 
   return (
     <DotAreaBox>
@@ -74,8 +65,8 @@ const DotSpan = styled.span`
 const OptionsList = styled.ul`
   cursor: pointer;
   position: absolute;
-  right: -80px;
-  top: 10px;
+  bottom: -60px;
+  right: -10px;
   width: 80px;
   border: 0.5px solid #dcdcdc;
   border-radius: 5px;

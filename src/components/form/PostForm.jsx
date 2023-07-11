@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import Input from '../common/Input';
 import usePostInfo from '../../feature/usePostInfo';
 import Button from '../common/Button';
 import useHashInput from '../../feature/useHashInput';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addPost, updatePost } from '../../api/post';
 import shortid from 'shortid';
 import postValidation from '../../feature/postValidation';
@@ -36,7 +36,8 @@ const PostForm = ({ fnc, post }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (post) {
-      const [_, internal, abroad, title, artist, linkUrl, hash] = e.target;
+      // 수정
+      const [_, internal, __, title, artist, linkUrl, hash] = e.target;
       if (editPostValidation(e.target, isOpenHanler)) {
         const checkedHash = hash.value
           .split(' ')
@@ -55,6 +56,7 @@ const PostForm = ({ fnc, post }) => {
         fnc();
       }
     } else {
+      // add
       if (postValidation(postInfo, isOpenHanler, pwInputOutline)) {
         const checkedHash = postInfo.hash.filter((h) => h !== '');
         const hash = [...checkedHash];
