@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { css, styled } from 'styled-components';
-import RandomColor from '../../feature/RandomColor';
+import RandomColor from '../../feature/randomColor';
 import Button from '../common/Button';
 import Modal from '../modal/Modal';
 import shortid from 'shortid';
