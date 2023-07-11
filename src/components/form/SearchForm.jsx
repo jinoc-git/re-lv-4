@@ -3,11 +3,12 @@ import { styled } from 'styled-components';
 import Input from '../common/Input';
 
 const SearchForm = () => {
+  // lv 5에서 사용
   return (
     <SearchFormLayout>
       <Form>
         <KeepBox></KeepBox>
-        <Input type={'text'} width={80} height={50} />
+        <Input type={'text'} w={'80%'} h={'50px'} />
       </Form>
     </SearchFormLayout>
   );
@@ -20,19 +21,26 @@ const SearchFormLayout = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-`;
-const KeepBox = styled.div`
-  width: 100%;
-  height: 30px;
-  border: 1px solid;
+  margin-bottom: 40px;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  justify-content: space-between;
   width: 40%;
   height: 120px;
   margin: 40px 0;
-  /* border: 1px solid; */
+  border: 1px solid;
+  @media only screen and (max-width: 1024px) {
+    width: 60%;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 80%;
+  }
+`;
+const KeepBox = styled.div`
+  width: 100%;
+  height: 40px;
+  border: 1px solid;
 `;

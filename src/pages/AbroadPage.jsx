@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import Header from '../components/header/Header';
+import Abroad from '../components/Abroad';
 import Footer from '../components/footer/Footer';
-import Detail from '../components/Detail';
 
-const DetailPage = () => {
+const AbroadPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
   return (
     <>
       <Header />
-      <Detail />
+      <Abroad />
       <Footer />
     </>
   );
 };
 
-export default DetailPage;
+export default AbroadPage;

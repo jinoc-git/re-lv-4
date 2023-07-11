@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import Detail from '../components/Detail';
+import Internal from '../components/Internal';
 
-const DetailPage = () => {
+const InternalPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
   return (
     <>
       <Header />
-      <Detail />
+      <Internal />
       <Footer />
     </>
   );
 };
 
-export default DetailPage;
+export default InternalPage;

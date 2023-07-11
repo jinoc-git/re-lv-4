@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './layout/Layout';
-import SearchForm from './form/SearchForm';
 import Contents from './Contents/Contents';
-import { getPosts } from '../api/post';
+import SearchForm from './form/SearchForm';
 import { useQuery } from '@tanstack/react-query';
+import { getPosts } from '../api/post';
 import { styled } from 'styled-components';
 import Button from './common/Button';
 
-const Home = () => {
+const Internal = () => {
   const { isLoading, isError, data } = useQuery(['posts'], getPosts);
   const [showTopBtn, setShowTopBtn] = useState(false);
 
@@ -19,7 +19,7 @@ const Home = () => {
   };
   useEffect(() => {
     const showBtn = () => {
-      if (window.scrollY > 500) {
+      if (window.scrollY > 800) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
@@ -30,10 +30,11 @@ const Home = () => {
       window.removeEventListener('scroll', showBtn);
     };
   }, []);
+
   return (
     <Layout>
       {/* <SearchForm /> */}
-      <Contents posts={data} />
+      <Contents posts={data} genre={'internal'} />
       {showTopBtn && (
         <TopBtnBox>
           <Button
@@ -50,7 +51,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Internal;
 
 const TopBtnBox = styled.div`
   position: fixed;

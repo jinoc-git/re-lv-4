@@ -9,7 +9,7 @@ const Footer = () => {
         <FooterLink target="_blank" to={'https://nbcamp.spartacodingclub.kr/'}>
           내일배움캠프
         </FooterLink>
-        <p style={{ margin: '10px 0' }}>
+        <Copyright>
           © 2023 &nbsp;
           <FooterLink target="_blank" to={''}>
             #Music
@@ -18,7 +18,7 @@ const Footer = () => {
           <FooterLink target="_blank" to={'https://github.com/jinoc-git'}>
             Jinoc
           </FooterLink>
-        </p>
+        </Copyright>
       </Box>
     </FooterLayout>
   );
@@ -32,22 +32,22 @@ const FooterLayout = styled.footer`
   width: 100%;
   height: 150px;
   margin-top: 100px;
-  background-color: bisque;
+  background-color: #F26419;
 `;
 const Box = styled.div`
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
 `;
 const FooterLink = styled(Link)`
-  font-weight: 600;
+  font-weight: 500;
   &:hover {
-    color: #222;
+    color: #fafafa;
   }
   &:visited {
-    color: #222;
+    color: #fafafa;
   }
 `;
-const Span = styled.span`
-  cursor: pointer;
-  font-weight: 600;
+const Copyright = styled.p`
+  margin: 20px 0;
+  color: #eee;
 `;

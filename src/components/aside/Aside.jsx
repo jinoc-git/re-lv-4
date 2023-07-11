@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const Aside = () => {
-  return (
-    <aside>Aside</aside>
-  )
-}
+  // lv 5에서 사용
+  return <aside>Aside</aside>;
+};
 
-export default Aside
+export default Aside;

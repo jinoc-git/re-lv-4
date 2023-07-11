@@ -1,22 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <HeaderLayout>
       <LogoBox>
-        <h1>#Music</h1>
+        <Logo onClick={() => navigate('/')}>#Music</Logo>
       </LogoBox>
       <Nav>
         <NavList>
-          <NavItem>홈</NavItem>
-          <NavItem>국내</NavItem>
-          <NavItem>해외</NavItem>
+          <NavItem onClick={() => navigate('/')}>홈</NavItem>
+          <NavItem onClick={() => navigate('/internal')}>국내</NavItem>
+          <NavItem onClick={() => navigate('/abroad')}>해외</NavItem>
         </NavList>
       </Nav>
-      <UserBox>
-        <User></User>
-      </UserBox>
+      {/* lv5 준비 */}
+      <UserBox>{/* <User></User> */}</UserBox>
     </HeaderLayout>
   );
 };
@@ -33,33 +34,53 @@ const HeaderLayout = styled.header`
   align-items: center;
   width: 100%;
   height: 80px;
-  background-color: aliceblue;
+  background-color: #fff;
 `;
 const LogoBox = styled.div`
   width: 120px;
   text-align: center;
+  color: #f26419;
+`;
+const Logo = styled.h1`
+  cursor: pointer;
+  font-family: 'NanumBarunGothic';
+  font-size: 24px;
+  line-height: 1.2;
 `;
 const Nav = styled.nav`
   width: 50%;
   text-align: center;
+  @media only screen and (max-width: 768px) {
+    width: 40%;
+  }
 `;
 const NavList = styled.ul`
   display: flex;
   justify-content: space-around;
-  background-color: beige;
 `;
 const NavItem = styled.li`
   cursor: pointer;
   width: 10%;
   height: 40px;
-  padding-top: 8px;
-  background-color: aqua;
+  padding-top: 11px;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'NanumBarunGothic';
+  &:hover {
+    border-bottom: 2px solid #f26419;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 15%;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 20%;
+  }
 `;
 const UserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10%;
+  width: 120px;
   height: 100%;
 `;
 const User = styled.div`

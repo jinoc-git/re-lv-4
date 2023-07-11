@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 
-const Input = ({ children, type, ...props }) => {
+const Input = ({ children, ...props }) => {
   const [value, setValue] = useState('');
+  const { type, name, refs, ph, val } = props;
+  
+  useEffect(() => {
+    if (val) {
+      setValue(val);
+    }
+  }, []);
 
   return (
     <ShareInput
-      type={type}
       {...props}
+      type={type}
+      name={name}
+      ref={refs}
       value={value}
-      onChange={({ target }) => setValue(target.value)}>
+      onChange={({ target }) => setValue(target.value)}
+      placeholder={ph ? ph : name}>
       {children}
     </ShareInput>
   );
@@ -18,13 +28,40 @@ const Input = ({ children, type, ...props }) => {
 export default Input;
 
 const ShareInput = styled.input`
-  ${(props) => {
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: ${({ fs }) => (fs ? fs : '18px')};
+  &:focus {
+    ${({ fcoc }) => {
+      return css`
+        outline: ${fcoc && `2px solid ${fcoc}`};
+      `;
+    }}
+  }
+  border: 0.5px solid ${({ bc }) => (bc ? bc : '#dcdcdc')};
+  ${({ w, h }) => {
     return css`
-      width: ${props.width}%;
-      height: ${props.height}px;
+      width: ${w};
+      height: ${h};
     `;
   }}
-  font-size: 18px;
-  padding: 0 10px;
-  border: 0.5px solid;
+  ${({ size }) => {
+    switch (size) {
+      case 'small':
+        return css`
+          width: 300px;
+          height: 30px;
+        `;
+      case 'medium':
+        return css`
+          width: 400px;
+          height: 35px;
+        `;
+      case 'large':
+        return css`
+          width: 500px;
+          height: 40px;
+        `;
+    }
+  }}
 `;
