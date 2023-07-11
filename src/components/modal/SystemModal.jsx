@@ -8,18 +8,7 @@ import { deletePost } from '../../api/post';
 import { useNavigate } from 'react-router-dom';
 
 const SystemModal = (props) => {
-  const {
-    msg,
-    isOpenHanler,
-    input,
-    controlPost,
-    setPwCheck,
-    changeMsg,
-    setChangeMsg,
-    type,
-    setConfirmDelete,
-    id,
-  } = props;
+  const { msg, isOpenHanler, input, controlPost, type, id } = props;
   const navigate = useNavigate();
   useEffect(() => {
     document.body.style = 'overflow: hidden';
@@ -33,6 +22,24 @@ const SystemModal = (props) => {
       queryClient.invalidateQueries('posts');
     },
   });
+  const confirmBtnHandler = () => {
+    if (!input) {
+      isOpenHanler(false);
+    }
+    if (input && type === 'delete') {
+      const val = checkInput.current.value;
+      controlPost(val, 'delete');
+    }
+    if (!input && msg === '정말 삭제하시겠습니까?') {
+      isOpenHanler(false);
+      mutation.mutate(id);
+      navigate('/');
+    }
+    if (input && type === 'edit') {
+      const val = checkInput.current.value;
+      controlPost(val, 'edit');
+    }
+  };
 
   return createPortal(
     <ModalLayout>
@@ -45,33 +52,17 @@ const SystemModal = (props) => {
             h={'36px'}
             fc={'#fff'}
             bc={'#222'}
-            fnc={() => {
-              if (!input && msg !== '정말 삭제하시겠습니까?') {
-                isOpenHanler(false);
-              } else if (msg === '정말 삭제하시겠습니까?') {
-                setConfirmDelete(true);
-                isOpenHanler(false);
-                mutation.mutate(id);
-                navigate('/');
-              } else {
-                const val = checkInput.current.value;
-                type === 'edit'
-                  ? controlPost(val, 'edit')
-                  : controlPost(val, 'delete');
-              }
-            }}>
+            fnc={confirmBtnHandler}>
             확인
           </Button>
-          {input || changeMsg ? (
+          {input || type ? (
             <Button
               w={'80px'}
               h={'36px'}
               fc={'#fff'}
               bc={'#222'}
               fnc={() => {
-                isOpenHanler(false);
-                setPwCheck('');
-                setChangeMsg(false);
+                controlPost(null, 'cancle');
               }}>
               취소
             </Button>

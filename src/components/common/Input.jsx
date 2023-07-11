@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 
 const Input = ({ children, ...props }) => {
   const [value, setValue] = useState('');
   const { type, name, refs, ph, val } = props;
+  
+  useEffect(() => {
+    if (val) {
+      setValue(val);
+    }
+  }, []);
 
   return (
     <ShareInput
@@ -11,7 +17,7 @@ const Input = ({ children, ...props }) => {
       type={type}
       name={name}
       ref={refs}
-      value={val ? val : value}
+      value={value}
       onChange={({ target }) => setValue(target.value)}
       placeholder={ph ? ph : name}>
       {children}
@@ -24,22 +30,22 @@ export default Input;
 const ShareInput = styled.input`
   padding: 0 10px;
   border-radius: 5px;
-  font-size: ${({fs}) => fs ? fs : '18px'};
+  font-size: ${({ fs }) => (fs ? fs : '18px')};
   &:focus {
-    ${({fcoc}) => {
+    ${({ fcoc }) => {
       return css`
         outline: ${fcoc && `2px solid ${fcoc}`};
-      `
+      `;
     }}
   }
-  border: 0.5px solid ${({bc}) => bc ? bc : '#dcdcdc'};
-  ${({w, h}) => {
+  border: 0.5px solid ${({ bc }) => (bc ? bc : '#dcdcdc')};
+  ${({ w, h }) => {
     return css`
       width: ${w};
       height: ${h};
     `;
   }}
-  ${({size}) => {
+  ${({ size }) => {
     switch (size) {
       case 'small':
         return css`

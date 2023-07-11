@@ -6,34 +6,55 @@ import YouTubePlayer from '../youtube/YouTubePlayer';
 import Dots from '../dots/Dots';
 import useSystemModal from '../../feature/useSystemModal';
 import SystemModal from '../modal/SystemModal';
+import Modal from '../modal/Modal';
+import { useQuery } from '@tanstack/react-query';
+import { getPosts } from '../../api/post';
 
 const DetailContents = ({ post }) => {
-  const { title, artist, hash, linkUrl, password } = post;
+  const { data } = useQuery(['posts'], getPosts);
+  const matchPost = data.find((a) => a.id === post.id)
+  const { title, artist, hash, linkUrl, password } = matchPost;
   const [systemIsOpen, msg, isOpenHanler] = useSystemModal();
-  const [pwCheck, setPwCheck] = useState('');
+  const [input, setInput] = useState(true);
   const [type, setType] = useState('');
-  const [changeMsg, setChangeMsg] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [editIsOpen, setEditIsOpen] = useState(false);
+
   const controlPost = (value, type) => {
+    if (type === 'cancle') {
+      isOpenHanler(false, '비밀번호를 입력해 주세요');
+      return false;
+    }
     if (password !== value) {
-      setPwCheck('비밀번호가 틀립니다');
+      isOpenHanler(true, '비밀번호가 틀립니다');
       return false;
     }
     if (type === 'edit') {
       isOpenHanler(false);
+      setEditIsOpen(true);
     }
-    if (type === 'delete' && !confirmDelete) {
-      setChangeMsg(true);
-      setPwCheck('정말 삭제하시겠습니까?');
+    if (type === 'delete') {
+      isOpenHanler(true, '정말 삭제하시겠습니까?');
+      setInput(false);
     }
   };
+
+  const editIsOpenToggleHandler = () => {
+    setEditIsOpen((prev) => !prev);
+
+  };
+
   return (
     <DetailContentsLayout>
       <h2 style={{ fontSize: '0px' }}>{title + ' 상세페이지'}</h2>
       <DetailInfoBox>
         <DetailInfoHeader>
           <DetailTitle>{title}</DetailTitle>
-          <Dots post={post} isOpenHanler={isOpenHanler} setType={setType} />
+          <Dots
+            post={matchPost}
+            isOpenHanler={isOpenHanler}
+            setType={setType}
+            setInput={setInput}
+          />
         </DetailInfoHeader>
         <DetailArtist>{artist}</DetailArtist>
         <HashBox>
@@ -47,18 +68,15 @@ const DetailContents = ({ post }) => {
       </DetailInfoBox>
       {systemIsOpen && (
         <SystemModal
-          msg={pwCheck ? pwCheck : msg}
-          input={changeMsg ? false : true}
+          msg={msg}
+          input={input}
           isOpenHanler={isOpenHanler}
           controlPost={controlPost}
-          setPwCheck={setPwCheck}
-          changeMsg={changeMsg}
-          setChangeMsg={setChangeMsg}
           type={type}
-          setConfirmDelete={setConfirmDelete}
-          id={post.id}
+          id={matchPost.id}
         />
       )}
+      {editIsOpen && <Modal fnc={editIsOpenToggleHandler} post={matchPost} />}
     </DetailContentsLayout>
   );
 };
