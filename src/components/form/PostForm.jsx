@@ -29,6 +29,7 @@ const PostForm = ({ fnc, post }) => {
       queryClient.setQueriesData(['posts', newPost.id], newPost);
     },
     onSuccess: () => {
+      console.log('in')
       queryClient.invalidateQueries('posts');
     },
   });
