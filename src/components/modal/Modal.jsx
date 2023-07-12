@@ -10,7 +10,7 @@ const Modal = ({ fnc, post }) => {
   });
   return createPortal(
     <ModalLayout>
-      <ModalBox post={post ? true : false}>
+      <ModalBox post={post}>
         <PostForm fnc={fnc} post={post} />
       </ModalBox>
     </ModalLayout>,
