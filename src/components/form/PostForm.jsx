@@ -39,7 +39,7 @@ const PostForm = ({ fnc, post }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (post) {
-      // 수정
+      // update
       const [_, internal, __, title, artist, linkUrl, hash] = e.target;
       if (editPostValidation(e.target, isOpenHanler)) {
         const checkedHash = hash.value

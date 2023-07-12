@@ -6,7 +6,7 @@ import Input from '../common/Input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deletePost } from '../../api/post';
 import { useNavigate } from 'react-router-dom';
-// 특정 데이터 삭제 시 삭제했던 데이터가 다시 추가 됨
+
 const SystemModal = (props) => {
   const { msg, isOpenHanler, input, controlPost, type, id } = props;
   const navigate = useNavigate();
