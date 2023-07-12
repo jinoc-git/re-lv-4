@@ -6,12 +6,17 @@ import Modal from '../modal/Modal';
 import shortid from 'shortid';
 import { useNavigate } from 'react-router-dom';
 
-const Contents = ({ posts, genre }) => {
+const Contents = ({ posts, genre, isLoading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenToggleHandler = () => {
     setIsOpen((prev) => !prev);
   };
   const navigate = useNavigate();
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
+
   return (
     <ContentsLayout>
       <h2 style={{ fontSize: '0px' }}>{genre ? genre : 'home'}</h2>
