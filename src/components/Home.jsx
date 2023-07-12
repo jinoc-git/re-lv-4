@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <Layout>
       {/* <SearchForm /> */}
-      <Contents posts={data} />
+      <Contents posts={data} isLoading={isLoading} />
       {showTopBtn && (
         <TopBtnBox>
           <Button

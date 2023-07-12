@@ -11,8 +11,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getPosts } from '../../api/post';
 
 const DetailContents = ({ post }) => {
-  const { data } = useQuery(['posts'], getPosts);
-  const matchPost = data.find((a) => a.id === post.id)
+  const { isLoading, data } = useQuery(['posts'], getPosts);
+  const matchPost = data.find((a) => a.id === post.id);
   const { title, artist, hash, linkUrl, password } = matchPost;
   const [systemIsOpen, msg, isOpenHanler] = useSystemModal();
   const [input, setInput] = useState(true);
@@ -40,8 +40,11 @@ const DetailContents = ({ post }) => {
 
   const editIsOpenToggleHandler = () => {
     setEditIsOpen((prev) => !prev);
-
   };
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
 
   return (
     <DetailContentsLayout>
